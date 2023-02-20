@@ -4,6 +4,8 @@ on:
   pull_request_target:
     branches: ["main"]
 
+permissions: write-all
+
 jobs:
   check:
     runs-on: ubuntu-latest
