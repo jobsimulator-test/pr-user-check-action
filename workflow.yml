@@ -5,13 +5,6 @@ on:
     branches: ["main"]
 
 jobs:
-  clone:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout PR
-        uses: actions/checkout@v3
-        # with:
-        #   ref: ${{ github.event.pull_request.head.sha }}
   check:
     runs-on: ubuntu-latest
     strategy:
@@ -26,10 +19,12 @@ jobs:
         run: |
           echo "USER_ID=${USER_ID}" >> $GITHUB_ENV
           echo "GH_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
-#       - name: Dump GitHub context
-#         env:
-#           GITHUB_CONTEXT: ${{ toJSON(github) }}
-#         run: echo "$GITHUB_CONTEXT"
+      #       - name: Dump GitHub context
+      #         env:
+      #           GITHUB_CONTEXT: ${{ toJSON(github) }}
+      #        email run: echo "$GITHUB_CONTEXT"
+      - name: Checkout
+        uses: actions/checkout@v3.3.0
       - name: Call serverless endpoint
         if: ${{ matrix.status == 200 }}
         run: |
