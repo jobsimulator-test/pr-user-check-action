@@ -24,6 +24,6 @@ jobs:
         run: |
           status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -d "${USER_EMAIL}" https://jobsim-pr-user-check.deno.dev)
           if [ $status_code -ne 200 ]; then
-            gh pr review ${{ github.event.number }} --body "User email ${USER_EMAIL} is not registered at jobsimulator.dev. Please make an account at https://www.jobsimulator.dev to have your PR be automatically tested."
+            gh pr review ${{ github.event.number }} --comment --body "User email ${USER_EMAIL} is not registered at jobsimulator.dev. Please make an account at https://www.jobsimulator.dev to have your PR be automatically tested."
             exit 1
           fi
