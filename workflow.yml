@@ -10,8 +10,8 @@ jobs:
     steps:
       - name: checkout PR
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+        # with:
+        #   ref: ${{ github.event.pull_request.head.sha }}
   check:
     runs-on: ubuntu-latest
     strategy:
