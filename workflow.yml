@@ -15,6 +15,7 @@ jobs:
       - name: Set up environment variables
         env:
           USER_EMAIL: ${{ github.event.sender.email }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           echo "USER_EMAIL=${USER_EMAIL}" >> $GITHUB_ENV
       - name: Call serverless endpoint
