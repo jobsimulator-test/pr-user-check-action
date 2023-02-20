@@ -1,10 +1,8 @@
 name: Check if User is registered at jobsimulator.dev
 
 on:
-  pull_request:
+  pull_request_target:
     branches: ["main"]
-
-permissions: write-all
 
 jobs:
   check:
