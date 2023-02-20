@@ -19,6 +19,15 @@ jobs:
         run: |
           echo "USER_EMAIL=${USER_EMAIL}" >> $GITHUB_ENV
           echo "GH_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
+      # - name: Checkout fork repo
+      #   uses: actions/checkout@v3
+      #   with:
+      #     repository: my-org/my-tools
+      #     path: my-tools
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Call serverless endpoint
         if: ${{ matrix.status == 200 }}
         run: |
