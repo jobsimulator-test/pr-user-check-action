@@ -25,11 +25,11 @@ jobs:
       #        email run: echo "$GITHUB_CONTEXT"
       - name: Checkout
         uses: actions/checkout@v3.3.0
-      - name: Call serverless endpoint
+      - name: Call API endpoint
         if: ${{ matrix.status == 200 }}
         run: |
           status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -d "${USER_ID}" https://jobsim-pr-user-check.deno.dev)
           if [ $status_code -ne 200 ]; then
-            # gh pr review ${{ github.event.number }} --comment --body "GitHub user with id ${USER_ID} is not registered at jobsimulator.dev. Please make an account at https://www.jobsimulator.dev to have your PR be automatically tested."
+            gh pr review ${{ github.event.number }} --comment --body "GitHub user with id ${USER_ID} is not registered at jobsimulator.dev. Please make an account at https://www.jobsimulator.dev to have your PR be automatically tested."
             exit 1
           fi
