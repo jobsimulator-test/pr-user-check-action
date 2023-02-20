@@ -1,35 +1,24 @@
-name: Check if User is registered at jobsimulator.dev
+name: JobSimulator.dev Test Checker
 
+# Controls when the workflow will run
 on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  check:
+  # This workflow contains a single job called "build"
+  test:
+    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # strategy:
-    #   fail-fast: true
-    #   matrix:
-    #     status: [200]
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
-      # - name: Set up environment variables
-      #   env:
-      #     USER_ID: ${{ github.event.sender.id }}
-      #     GH_TOKEN: ${{ github.token }}
-      #   run: |
-      #     echo "USER_ID=${USER_ID}" >> $GITHUB_ENV
-      #     echo "GH_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
-      #       - name: Dump GitHub context
-      #         env:
-      #           GITHUB_CONTEXT: ${{ toJSON(github) }}
-      #        email run: echo "$GITHUB_CONTEXT"
-      # - name: Call serverless endpoint
-      #   if: ${{ matrix.status == 200 }}
-      #   run: |
-      #     status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -d "${USER_ID}" https://jobsim-pr-user-check.deno.dev)
-      #     if [ $status_code -ne 200 ]; then
-      #       gh pr review ${{ github.event.number }} --comment --body "GitHub user with id ${USER_ID} is not registered at jobsimulator.dev. Please make an account at https://www.jobsimulator.dev to have your PR be automatically tested."
-      #       exit 1
-      #     fi
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
