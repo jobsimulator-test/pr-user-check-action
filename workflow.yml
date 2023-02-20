@@ -23,8 +23,8 @@ jobs:
       #         env:
       #           GITHUB_CONTEXT: ${{ toJSON(github) }}
       #        email run: echo "$GITHUB_CONTEXT"
-      - name: Checkout
-        uses: actions/checkout@v3.3.0
+      # - name: Checkout
+      #   uses: actions/checkout@v3.3.0
       - name: Call serverless endpoint
         if: ${{ matrix.status == 200 }}
         run: |
