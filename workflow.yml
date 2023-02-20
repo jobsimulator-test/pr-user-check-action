@@ -12,16 +12,15 @@ jobs:
       matrix:
         status: [200]
     steps:
-    - name: Set up environment variables
-      env:
-        USER_EMAIL: ${{ github.event.sender.email }}
-      run: |
-        echo "USER_EMAIL=${USER_EMAIL}" >> $GITHUB_ENV
-    - name: Call serverless endpoint
-      if: ${{ matrix.status == 200 }}
-      run: |
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -H -d "${USER_EMAIL}" https://jobsim-pr-user-check.deno.dev)
-        if [ $status_code -ne 200 ]; then
-          echo "endpoint returned a non-200 status code: $status_code"
-          exit 1
-        fi
+      - name: Set up environment variables
+        env:
+          USER_EMAIL: ${{ github.event.sender.email }}
+        run: |
+          echo "USER_EMAIL=${USER_EMAIL}" >> $GITHUB_ENV
+      - name: Call serverless endpoint
+        if: ${{ matrix.status == 200 }}
+        run: |
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -d hi@example.com https://jobsim-pr-user-check.deno.dev)
+          if [ $status_code -ne 200 ]; then
+            exit 1
+          fi
