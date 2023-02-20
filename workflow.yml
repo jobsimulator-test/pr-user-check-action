@@ -20,7 +20,7 @@ jobs:
       - name: Call serverless endpoint
         if: ${{ matrix.status == 200 }}
         run: |
-          status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -d hi@example.com https://jobsim-pr-user-check.deno.dev)
+          status_code=$(curl -s -o /dev/null -w "%{http_code}" -X POST -d "${USER_EMAIL}" https://jobsim-pr-user-check.deno.dev)
           if [ $status_code -ne 200 ]; then
             exit 1
           fi
