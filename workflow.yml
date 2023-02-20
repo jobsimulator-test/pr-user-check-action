@@ -16,7 +16,7 @@ jobs:
         env:
           USER_ID: ${{ github.event.sender.id }}
           # GH_TOKEN: ${{ github.token }}
-          GH_TOKEN: ${{ github.secrets.GH_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           echo "USER_ID=${USER_ID}" >> $GITHUB_ENV
           echo "GH_TOKEN=${GH_TOKEN}" >> $GITHUB_ENV
